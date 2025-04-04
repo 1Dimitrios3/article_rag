@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+*.env
+
+# Chroma Storage
+cache*/
+embeddings1/
+together_embeddings/
+
+# Tanstack
+node_modules/
+dist/
+
+# Document folders
+images/*

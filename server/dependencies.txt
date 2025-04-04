@@ -1,0 +1,12 @@
+flask
+flask-cors
+asgiref
+python-dotenv
+chromadb
+nltk
+requests
+beautifulsoup4
+filecache
+bm25s
+openai
+together
