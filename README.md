@@ -1,6 +1,6 @@
 # RAG Chatbot for Articles
 
-This repository contains the code for a Retrieval-Augmented Generation (RAG) Chatbot designed specifically for analyzing and interacting with articles. Simply provide an article URL, and the system will fetch, process, and embed the content for insightful conversations and summaries.
+This repository contains the code for a Retrieval-Augmented Generation (RAG) Chatbot designed specifically for analyzing and interacting with articles. Drawing inspiration from [Anthropic’s article on contextual retrieval](https://www.anthropic.com/news/contextual-retrieval) — which introduces a new hybrid and more efficient approach — the system processes article URLs by scraping, processing, and embedding the content to generate insightful conversations and summaries.
 
 ## Key Features:
 - **Article-Based Queries:** Provide a URL to an article and let the system read, embed, and analyze its content.
@@ -12,8 +12,8 @@ This repository contains the code for a Retrieval-Augmented Generation (RAG) Cha
 - **Relevant Article Suggestions:** When using OpenAI as the integrator, receive suggestions for related articles that may enhance your research or discussion.
 
 The project is split into two parts:
-- A **FastAPI-based backend** that handles PDF processing, training, and chat interactions.
-- A **TanStack Router frontend** that provides the user interface for interacting with the chatbot.
+- A **Flask-based backend** that handles article processing, embedding generation, and chat interactions.
+- A **TanStack Router frontend** that provides the user interface for interacting with the article content.
 
 ---
 
@@ -28,9 +28,9 @@ Create a .env file in the backend root directory with the following variables:
    TOGETHER_API_KEY=your_together_key_here
 
 
-**CHROMA_STORAGE_PATH**: Specifies where article embeddings are stored.
-**OPENAI_API_KEY**: Your API key for using OpenAI. [OpenAI Documentation](https://platform.openai.com/docs/overview)
-**TOGETHER_API_KEY**: Your API key for using TogetherAI. [TogetherAI Documentation](https://www.together.ai)
+- **CHROMA_STORAGE_PATH**: Specifies where article embeddings are stored.
+- **OPENAI_API_KEY**: Your API key for using OpenAI. [OpenAI Documentation](https://platform.openai.com/docs/overview)
+- **TOGETHER_API_KEY**: Your API key for using TogetherAI. [TogetherAI Documentation](https://www.together.ai)
 
 Note: Set the key for the integrator you plan to use. You can configure both if you wish to switch between services.
 
