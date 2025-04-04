@@ -45,8 +45,9 @@ Note: Set the key for the integrator you plan to use. You can configure both if 
    ```bash
    pip/python install -r dependencies.txt
 
-3. Start the Backend Server locally cd server
+3. Start the Backend Server locally
      ```bash
+     cd server
      uvicorn main:asgi_app --reload
 
 ## Frontend Setup
