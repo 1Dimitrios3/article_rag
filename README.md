@@ -45,13 +45,13 @@ Note: Set the key for the integrator you plan to use. You can configure both if 
    ```bash
    pip/python install -r dependencies.txt
 
-3. Start the Backend Server locally
+3. Start the Backend Server locally cd server
      ```bash
      uvicorn main:asgi_app --reload
 
 ## Frontend Setup
 
-1. cd tanstack_fe
+1. cd client
    ```bash
       pnpm i 
       pnpm dev
