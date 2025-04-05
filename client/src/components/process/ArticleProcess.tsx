@@ -9,6 +9,7 @@ import SelectList from '../selectList';
 import { useSettings } from '~/contexts/SettingsContext';
 import { useQuery } from '@tanstack/react-query';
 import { fetchIntegratorData } from '~/services/fetchers';
+import { extractErrorMessage } from '~/utils/errorMessageExtractor';
 
 const processArticleSchema = z.object({
     url: z.string({ required_error: 'url is required' }).url("Please enter a valid URL"),
@@ -33,7 +34,8 @@ const processArticle = createServerFn({ method: 'POST' })
 
     if (!response.ok) {
       const errorResponse = await response.json();
-      throw new Error(errorResponse.detail || 'Failed to process article');
+      console.log('errorResponse', errorResponse)
+      throw new Error(errorResponse.error || 'Failed to process article');
     }
 
     const result = await response.json();
@@ -77,7 +79,7 @@ const ArticleProcess: React.FC = () => {
         if (error) {
           const timer = setTimeout(() => {
             setError("");
-          }, 5000);
+          }, 8000);
           return () => clearTimeout(timer);
         }
       }, [error]);
@@ -89,12 +91,7 @@ const ArticleProcess: React.FC = () => {
         setArticleTitle(data.articleTitle);
         setArticleImageUrl(`${baseUrl}/api/article-image?ts=${Date.now()}`);
       } catch (error: any) {
-            let errorMsg;
-              const parsedError = JSON.parse(error.message);
-              if (Array.isArray(parsedError) && parsedError.length > 0) {
-                errorMsg = parsedError[0].message;
-              }
-              setError(errorMsg);
+        setError(extractErrorMessage(error));
       } finally {
         setLoading(false);
       }

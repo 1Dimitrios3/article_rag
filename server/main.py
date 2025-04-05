@@ -112,8 +112,9 @@ def process_article_endpoint():
         return jsonify({"message": "Article has been processed successfully.", "articleTitle": article_title }), 200
     
     except Exception as e:
-        print(f"Error processing article: {e}")
-        return jsonify({"error": "Internal server error during article processing."}), 500    
+        error_message = f"Server error during article processing. Details: {str(e)}"
+        print(f"Error processing article: {error_message}")
+        return jsonify({"error": error_message}), 500   
 
 # Global chat history dictionary.
 chat_histories = {}

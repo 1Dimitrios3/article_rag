@@ -72,7 +72,9 @@ class Scraper:
             else:
                 print("No suitable non-tracking image found.")
         except requests.RequestException as e:
-            print(f"Image scraping failed: {e}")
+            error_msg = f"Image scraping failed: {str(e)}"
+            print(error_msg)
+            raise Exception(error_msg)
 
 
     def _scrape_text(self, url: str):
@@ -117,7 +119,9 @@ class Scraper:
         Returns a dictionary with the article title and the full text (joined text snippets).
         """
         print("Starting image scraping...")
-        self._scrape_image(url)
+        image_result = self._scrape_image(url)
+        if isinstance(image_result, dict) and "error" in image_result:
+            return image_result
         
         print("Scraping text...")
         title, text_snippets = self._scrape_text(url)
