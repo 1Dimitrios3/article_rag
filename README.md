@@ -19,9 +19,9 @@ The project is split into two parts:
 
 ## Environment Configuration
 
-Create a .env file in the backend root directory with the following variables:
+Create a .env file in the server root directory with the following variables:
 
-1. Create a `.env` file in the backend root directory with the following content:
+1. Create a `.env` file with the following content:
    ```env
    CHROMA_STORAGE_PATH=./chroma_storage
    OPENAI_API_KEY=your_openai_key_here
