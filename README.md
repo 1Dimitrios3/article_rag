@@ -50,6 +50,11 @@ Note: Set the key for the integrator you plan to use. You can configure both if 
      cd server
      uvicorn main:asgi_app --reload
 
+4. Optionally run the server using Docker
+      ```bash
+      docker build -f Dockerfile -t your_image_name .
+      docker run -p 8000:8000 -e OPENAI_API_KEY=your_openai_api_key -e TOGETHER_API_KEY=your_togetherai_api_key your_image_name
+
 ## Frontend Setup
 
 1. cd client

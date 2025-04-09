@@ -39,13 +39,22 @@ def get_chroma_client(integrator: str):
     
     return initialize_chroma_client(storage_path)
 
-def clear_all_cache_and_embeddings(cache_dir: str, storage_path: str, integrator: str = 'random',  base_name: str = "document", chroma_client=None):
+def clear_all_cache_and_embeddings(
+        cache_dir: str, 
+        storage_path: str, 
+        integrator: str = 'random',  
+        base_name: str = "document", 
+        chroma_client=None
+        ):
     """
     Clears the local file cache, the Chroma vector database storage, and all file cache title entries.
     
     Args:
         cache_dir (str): The path to the file-based cache directory.
         storage_path (str): The path to the Chroma vector database storage.
+        integrator (str): Identifier for the integrator.
+        base_name (str): Base name for the document caching.
+        chroma_client: The Chroma client instance.
     """
     # Close the existing client connection if it exists.
     if chroma_client is not None:
@@ -60,12 +69,21 @@ def clear_all_cache_and_embeddings(cache_dir: str, storage_path: str, integrator
         file_cache = FileCache(cache_dir)
         file_cache.cleanup()
         
-        shutil.rmtree(cache_dir)
-        print(f"Cleared file cache at {cache_dir}")
+        # Remove all files and subdirectories within cache_dir.
+        for filename in os.listdir(cache_dir):
+            file_path = os.path.join(cache_dir, filename)
+            try:
+                if os.path.isfile(file_path) or os.path.islink(file_path):
+                    os.unlink(file_path)
+                elif os.path.isdir(file_path):
+                    shutil.rmtree(file_path)
+            except Exception as e:
+                print(f"Failed to delete {file_path}. Reason: {e}")
+        print(f"Cleared file cache contents at {cache_dir}")
     else:
         print(f"No cache directory found at {cache_dir}")
 
-    # Recreate the cache directory after clearing
+    # Ensure the cache directory still exists.
     os.makedirs(cache_dir, exist_ok=True)
 
     # Clear Chroma storage.
