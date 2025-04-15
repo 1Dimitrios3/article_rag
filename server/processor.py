@@ -1,3 +1,4 @@
+import math
 import os
 from typing import List
 import nltk
@@ -141,7 +142,7 @@ class TextProcessor:
         self.chunks = load_from_cache(self.chunks_cache)
         if not self.chunks:
             print("No cached chunks found. Generating new chunks.")
-            self.chunks = self._create_chunks(self.chunk_size, overlap=int(self.chunk_size / 20))
+            self.chunks = self._create_chunks(self.chunk_size, overlap=math.ceil(self.chunk_size / 20))
             if not self.chunks:
                 raise ValueError("Failed to generate chunks from the document.")
             save_to_cache(self.chunks, self.chunks_cache)

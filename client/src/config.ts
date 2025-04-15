@@ -32,6 +32,7 @@ const modelMapper = {
 
 const chunkSizeOptions = [
   { label: "Select chunk size", value: "0" },
+  { label: "20 segments", value: "20" },
   { label: "50 segments", value: "50" },
   { label: "100 segments", value: "100" },
   { label: "150 segments", value: "150" },
